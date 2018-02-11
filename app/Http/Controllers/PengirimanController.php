@@ -297,16 +297,16 @@ class PengirimanController extends Controller
             $xsightApiToken = $xsightApiToken . $body[$i];
         }
         $client = new Client();
-        $response = $client->request('GET', 'http://api.mainapi.net/tracklogistic/v1.0/vessel/schedule', [
+        $response = $client->request('GET', 'http://api.mainapi.net/logistic/v1.0/vessel/schedule', [
             'headers' => [
                 'Authorization' => 'Bearer ' . $xsightApiToken
             ],
-            'form_params' => [
+            'query' => [
                 'start' => '2016-10-10',
                 'end' => '2016-10-17'
             ]
         ]);
         $body = (string) $response->getBody(true);
-        var_dump($body);
+        return view ('pengiriman.vessel')->with('result', $body);
     }
 }
